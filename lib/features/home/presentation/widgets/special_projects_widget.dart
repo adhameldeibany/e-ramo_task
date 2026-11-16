@@ -117,7 +117,7 @@ class _SpecialProjectsWidgetState extends State<SpecialProjectsWidget> {
               ),
               GestureDetector(
                 onTap: toggleFavorite,
-                child: Icon(isFavorite?Icons.favorite:Icons.favorite_border,color: Colors.red,size: 22.sp),
+                child: Icon(isFavorite?Icons.favorite:Icons.favorite_border,color: isFavorite ? Colors.red : Colors.grey,size: 22.sp),
               ),
             ],
           ),
