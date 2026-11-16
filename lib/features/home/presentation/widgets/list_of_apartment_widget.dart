@@ -35,16 +35,19 @@ class _ListOfApartmentWidgetState extends State<ListOfApartmentWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Directionality(
-          textDirection: TextDirection.rtl,
-          child: Row(
-            children: [
-              _filterItem('الكل', 0),
-              _divider(),
-              _filterItem('للبيع', 1),
-              _divider(),
-              _filterItem('للإيجار', 2),
-            ],
+        Padding(
+          padding: EdgeInsets.only(right: 8.w),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              children: [
+                _filterItem('الكل', 0),
+                _divider(),
+                _filterItem('للبيع', 1),
+                _divider(),
+                _filterItem('للإيجار', 2),
+              ],
+            ),
           ),
         ),
         SizedBox(height: 18.h),
