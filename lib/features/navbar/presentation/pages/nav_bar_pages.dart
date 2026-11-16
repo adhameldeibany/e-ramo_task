@@ -1,0 +1,180 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class NavBarPages extends StatefulWidget {
+  final int initialIndex;
+  final ValueChanged<int>? onTap;
+
+  const NavBarPages({super.key,this.initialIndex = 2,this.onTap});
+
+  @override
+  State<NavBarPages> createState() => _NavBarPagesState();
+}
+
+class _NavBarPagesState extends State<NavBarPages> {
+  late int selectedIndex;
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.initialIndex;
+  }
+  final Color activeColor = const Color(0xff005879);
+  final Color inactiveColor = const Color(0xff50545A);
+
+  final List<Map<String, dynamic>> items = [
+    {'title': 'عقاراتي', 'icon': Icons.apartment_outlined},
+    {'title': 'العروض', 'icon': Icons.local_fire_department_outlined},
+    {'title': 'الرئيسية', 'icon': Icons.home_outlined},
+    {'title': 'السوق', 'icon': Icons.storefront_outlined},
+    {'title': 'المطورون', 'icon': Icons.person_outline_sharp},
+  ];
+
+  void changeTab(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+    widget.onTap?.call(index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150.h,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.topCenter,
+        children: [
+          Positioned(
+            left: 10.w,
+            right: 10.w,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(32.r),
+                  bottom: Radius.circular(32.r),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 25.w,
+            right: 25.w,
+            top: 38.h,
+            child: Container(
+              height: 90.h,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(26.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.10),
+                    blurRadius: 7,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildItem(0),
+                  _buildItem(1),
+                  SizedBox(width: 65.w),
+                  _buildItem(3),
+                  _buildItem(4),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 8.h,
+            child: GestureDetector(
+              onTap: () => changeTab(2),
+              child: Container(
+                width: 76.w,
+                height: 76.w,
+                decoration: BoxDecoration(
+                  color: activeColor,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 4.w),
+                  boxShadow: [
+                    BoxShadow(
+                      color: activeColor.withOpacity(0.25),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Icon(Icons.home_outlined,color: Colors.white,size: 35.sp),
+                    Positioned(
+                      right: 17.w,
+                      top: 23.h,
+                      child: Container(
+                        width: 15.w,
+                        height: 15.w,
+                        decoration: BoxDecoration(
+                          color: activeColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white,width: 1.5),
+                        ),
+                        child: Icon(Icons.search,color: Colors.white,size: 10.sp),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 16.h,
+            child: Container(
+              width: 142.w,
+              height: 5.h,
+              decoration: BoxDecoration(
+                color: const Color(0xffBFC5CD),
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildItem(int index) {
+    final isSelected = selectedIndex == index;
+    return GestureDetector(
+      onTap: () => changeTab(index),
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        width: 55.w,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              items[index]['icon'],
+              size: 25.sp,
+              color: isSelected ? activeColor : inactiveColor,
+            ),
+            SizedBox(height: 5.h),
+            Text(
+              items[index]['title'],
+              style: TextStyle(
+                fontFamily: 'noto',
+                fontSize: 12.sp,
+                color: isSelected ? activeColor : inactiveColor,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
