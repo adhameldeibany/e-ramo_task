@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../Core/config/app_assets.dart';
 
 class NavBarPages extends StatefulWidget {
   final int initialIndex;
@@ -23,11 +26,11 @@ class _NavBarPagesState extends State<NavBarPages> {
   final Color inactiveColor = const Color(0xff50545A);
 
   final List<Map<String, dynamic>> items = [
-    {'title': 'عقاراتي', 'icon': Icons.apartment_outlined},
-    {'title': 'العروض', 'icon': Icons.local_fire_department_outlined},
-    {'title': 'الرئيسية', 'icon': Icons.home_outlined},
-    {'title': 'السوق', 'icon': Icons.storefront_outlined},
-    {'title': 'المطورون', 'icon': Icons.person_outline_sharp},
+    {'title': 'عقاراتي', 'icon': Navbar.buildings},
+    {'title': 'العروض', 'icon': Navbar.offers},
+    {'title': 'الرئيسية', 'icon': Navbar.Group},
+    {'title': 'السوق', 'icon': Navbar.market},
+    {'title': 'المطورون', 'icon': Navbar.developers},
   ];
 
   void changeTab(int index) {
@@ -53,10 +56,7 @@ class _NavBarPagesState extends State<NavBarPages> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(32.r),
-                  bottom: Radius.circular(32.r),
-                ),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(15.r), bottomLeft: Radius.circular(30.r), bottomRight: Radius.circular(30.r), topRight: Radius.circular(15.r)),
               ),
             ),
           ),
@@ -65,7 +65,7 @@ class _NavBarPagesState extends State<NavBarPages> {
             right: 25.w,
             top: 38.h,
             child: Container(
-              height: 90.h,
+              height: 80.h,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(26.r),
@@ -157,9 +157,10 @@ class _NavBarPagesState extends State<NavBarPages> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            SvgPicture.asset(
               items[index]['icon'],
-              size: 25.sp,
+              width: 25.sp,
+              height: 25.sp,
               color: isSelected ? activeColor : inactiveColor,
             ),
             SizedBox(height: 5.h),

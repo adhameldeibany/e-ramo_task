@@ -20,9 +20,9 @@ class Home {
 
 //navbar
 class Navbar {
-  static const String home = 'assets/images/home/home.png';
-  static const String developers = 'assets/images/home/developers.png';
-  static const String market = 'assets/images/home/market.png';
-  static const String offers = 'assets/images/home/offers.png';
-  static const String buildings = 'assets/images/home/buildings.png';
+  static const String Group = 'assets/images/home/Group.svg';
+  static const String developers = 'assets/images/home/developers.svg';
+  static const String market = 'assets/images/home/market.svg';
+  static const String offers = 'assets/images/home/offers.svg';
+  static const String buildings = 'assets/images/home/buildings.svg';
 }
